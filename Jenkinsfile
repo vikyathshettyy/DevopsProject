@@ -26,6 +26,13 @@ pipeline{
                 }
             }
         }
+        stage('trigger swarm worker to pull the new image and run it') {
+            steps{
+                sh 'docker service update --image vikyath11/vikyath-artifactory:v${BUILD_NUMBER} my_servicess'
+            }
+        }
+        
+        
         
     }
 }

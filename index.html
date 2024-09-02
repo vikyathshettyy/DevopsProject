@@ -8,8 +8,19 @@
 
 	<body>
 		<h1> Devops project by Vikyath Shetty B</h1>
-		<p> This website is a simple nodejs applicaton running on aws instance which has a jenkins CI CD pipeline. Any changes committed into the repo of this project is reflected here with automation. This is a dockerized application which is running on a container on the aws instance.</p>
+		<h2> This website is a simple nodejs applicaton running on aws instance which has a jenkins CI CD pipeline. Any changes committed into the repo of this project is reflected here with automation. This is a dockerized application which is running on a container on the aws instance.</h2>
 		<button onclick="changeBackgroundColor()">Change Background Color</button>
+
+		// testing
+		<h1>Calculate interest</h1>
+		    <input type="text" id="principle" placeholder="Enter Principle"><br><br>
+		    <input type="text" id="interest" placeholder="Enter Interest"><br><br>
+		    <input type="text" id="years" placeholder="Enter Years"><br><br>
+		
+		    <button id="btn1" onclick="calculate()">Calculate</button><br><br>
+		    <div id="ans"></div>
+		//test
+		
 
 	    <script>
 	        function changeBackgroundColor() {
@@ -19,8 +30,25 @@
 	
 	            // Set the background color of the body
 	            document.body.style.backgroundColor = randomColor;
+
+
+
+		
 	        }
-	    </script>	
+		async function calculate() {
+	            const pValue = document.getElementById("principle").value;
+	            const iValue = document.getElementById("interest").value;
+	            const yValue = document.getElementById("years").value;
+	            const ans = await fetch("http://35.154.107.27:3000/calculate?p=" + pValue + "&y=" + yValue + "&i=" +iValue);
+	            const finalans = await ans.json();
+	            document.getElementById("ans").innerHTML = "Total is " + finalans.total + " and interest amount is " 
+	            + finalans.amount;
+		}
+
+		    
+	    </script>
+
+		
 		
 	</body>
 

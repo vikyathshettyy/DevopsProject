@@ -1,8 +1,8 @@
 def img
 pipeline {
     environment {
-        registry = "yunandar711/simple-flask-ui" // To push an image to Docker Hub, you must first name your local image using your Docker Hub username and the repository name that you created through Docker Hub on the web.
-        registryCredential = 'dockerhub-yunandar711' // it's have to be same with ID credential name
+        registry = "vikyath11/vikyath-artifactory" // To push an image to Docker Hub, you must first name your local image using your Docker Hub username and the repository name that you created through Docker Hub on the web.
+        registryCredential = 'dockerhub-id' // it's have to be same with ID credential name
         dockerImage = ''
     }
     agent any

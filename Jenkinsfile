@@ -32,6 +32,12 @@ pipeline{
             }
         }
         
+        stage('Post build') {
+            steps{
+                sh 'docker rmi vikyath11/vikyath-artifactory:v${BUILD_NUMBER}' 
+            }
+        }
+        
         
         
     }

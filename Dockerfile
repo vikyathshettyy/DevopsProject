@@ -2,9 +2,11 @@ FROM mhart/alpine-node
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY package* .
 
 RUN npm install
+
+COPY . .
 
 EXPOSE 3000
 

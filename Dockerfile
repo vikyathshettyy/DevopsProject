@@ -2,7 +2,7 @@ FROM mhart/alpine-node
 
 WORKDIR /usr/src/app
 
-COPY package* .
+COPY package* ./
 
 RUN npm install
 

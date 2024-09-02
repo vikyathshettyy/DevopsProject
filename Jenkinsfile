@@ -1,23 +1,31 @@
-node {    
-      def app     
-      stage('Clone repository') {               
-             
-            checkout scm    
-      }     
-      stage('Build image') {         
-       
-            app = docker.build("brandonjones085/test")    
-       }     
-      stage('Test image') {           
-            app.inside {            
-             
-             sh 'echo "Tests passed"'        
-            }    
-        }     
-       stage('Push image') {
-                                                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-id') {            
-       app.push("${env.BUILD_NUMBER}")            
-       app.push("latest")        
-              }    
-           }
+pipeline{
+    agent any
+    stages{
+        stage('Checkout '){
+            steps{
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vikyathshettyy/DevopsProject']])
+                sh 'echo checked out from git'
+                
+            }
+            
         }
+        stage('Build Docker Image') {
+            steps{
+                script{
+                    sh 'docker build -t vikyath11/vikyath-artifactory:v${BUILD_NUMBER} .'
+                }
+            }
+        }
+        stage('Push image to artifactory') {
+            steps{
+                withCredentials([string(credentialsId: 'dockerhub-passwd', variable: 'dockerhubpasswd')]) {
+                    sh 'docker login -u vikyath11 -p ${dockerhubpasswd}'
+                    
+                    
+                    sh 'docker push vikyath11/vikyath-artifactory:v${BUILD_NUMBER}'
+                }
+            }
+        }
+        
+    }
+}

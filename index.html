@@ -39,7 +39,7 @@
 	            const pValue = document.getElementById("principle").value;
 	            const iValue = document.getElementById("interest").value;
 	            const yValue = document.getElementById("years").value;
-	            const ans = await fetch("http://35.154.107.27:3000/calculate?p=" + pValue + "&y=" + yValue + "&i=" +iValue);
+	            const ans = await fetch("http://65.0.138.90:3000/calculate?p=" + pValue + "&y=" + yValue + "&i=" +iValue);
 	            const finalans = await ans.json();
 	            document.getElementById("ans").innerHTML = "Total is " + finalans.total + " and interest amount is " 
 	            + finalans.amount;
